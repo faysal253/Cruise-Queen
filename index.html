@@ -31,7 +31,9 @@
 
         <div class="booking-content">
             <h1>Cruise Queen</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book./p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book./p>
         </div>
 
 
@@ -48,65 +50,147 @@
             <div class="inputs">
                 <div class="input-group">
                     <label" for="">Departure</label>
-                    <input class="inp-style" type="date" name="">
+                        <input class="inp-style" type="date" name="">
                 </div>
                 <div class="input-group">
                     <label for="">Return</label>
                     <input class="inp-style" type="date" name="">
                 </div>
             </div>
+
+            <!-- first class  -->
             <div class="input-group f-class">
                 <div>
-                    <label for="">First Class ($150)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <label for="">First Class ($ <span id="firstClass-total">150</span>)</label>
+                    <input id="firstClass-amount" class="inp-style inp-width" type="number" name="" value="1" min="0">
                 </div>
+
+                <!-- plus - minus button -->
                 <div class="plus-minus-btn">
-                    <p>+ -</p>
+                    <p> <span onclick="getTicket('firstClass',true)">+</span> <span
+                            onclick="getTicket('firstClass',false)">-</span> </p>
                 </div>
             </div>
-            
+
+            <!-- economy class  -->
             <div class="input-group f-class">
                 <div>
-                    <label for="">Economy ($100)</label>
-                    <input class="inp-style inp-width" type="number" name="">
+                    <label for="">Economy ($ <span id="economyClass-total">100</span>)</label>
+                    <input id="economyClass-amount" class="inp-style inp-width" type="number" name="" value="1" min="0">
                 </div>
+
+                <!-- plus - minus button  -->
                 <div class="plus-minus-btn">
-                    <p> <span>+</span> <span>-</span> </p>
+                    <p> <span onclick="getTicket('economyClass',true)">+</span> <span
+                            onclick="getTicket('economyClass',false)">-</span> </p>
                 </div>
             </div>
+
+            <!-- calculations  -->
             <div class="calculations">
+                <!-- Subtotal  -->
                 <div class="amount">
                     <div class="left">
                         <p>Subtotal</p>
                     </div>
                     <div class="right">
-                        <p>$500</p>
+                        <p id="total-amount">$500</p>
                     </div>
                 </div>
+                <!-- subtotal end! -->
 
+                <!-- VAT -->
                 <div class="amount">
                     <div class="left">
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p>$50</p>
+                        <p id="tax">$50</p>
                     </div>
                 </div>
+                <!-- VAT end! -->
                 <hr>
+                <!-- grand total  -->
                 <div class="amount">
                     <div class="left">
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$550</p>
+                        <p id="grand-total">$550</p>
                     </div>
                 </div>
+                <!-- grand total end! -->
             </div>
+            <!-- calculations end! -->
             <button class="btn-style">Book Now</button>
         </div>
-    </main>
 
-    <!--Thank You-->
+    </main>
+    <!-- end!!!! -->
+
+    <!-- script tag -->
+    <script>
+        // ticket calculation
+        function getTicket(ticket, isIncrease) {
+            const ticketInput = document.getElementById(ticket + '-amount');
+            const ticketCount = parseInt(ticketInput.value);
+
+            let ticketNewCount = ticketCount;
+            if (isIncrease == true) {
+                ticketNewCount = ticketCount + 1;
+            }
+            if (isIncrease == false && ticketCount > 0) {
+                ticketNewCount = ticketCount - 1;
+            }
+
+            ticketInput.value = ticketNewCount;
+
+            let ticketCountTotal = ticketNewCount;
+            if (ticket == 'firstClass') {
+                ticketCountTotal = ticketNewCount * 150;
+
+            }
+            if (ticket == 'economyClass') {
+                ticketCountTotal = ticketNewCount * 100;
+            }
+
+            document.getElementById(ticket + '-total').innerText = ticketCountTotal;
+            totalCalculations()
+        }
+        // ticket calculation end!
+
+        // subtotal, tax, total calculations
+        function totalCalculations() {
+            // subtotal
+            const firstClassAmount = getInputValue('firstClass')
+            const economyClassAmount = getInputValue('economyClass')
+
+            const totalPrice = firstClassAmount * 150 + economyClassAmount * 100;
+            document.getElementById('total-amount').innerText = '$' + totalPrice;
+
+            // tax
+            const tax = totalPrice * 0.1
+            document.getElementById('tax').innerText = '$' + tax;
+
+            // grand total 
+            const grandTotal = totalPrice + tax;
+            document.getElementById('grand-total').innerText = '$' + grandTotal;
+
+        }
+        function getInputValue(ticket) {
+            const ticketInput = document.getElementById(ticket + '-amount');
+            const ticketAmount = parseInt(ticketInput.value);
+            return ticketAmount;
+        }
+
+        // const newAmount = document.getElementById('economyClass-total');
+        // const newTotalAmount = parseInt(newAmount.value)
+        // const totalAmountNumber = newTotalAmount * 100;
+
+        // const totalPrice = totalAmount * 150 + newTotalAmount * 100;
+        // document.getElementById('totalPrice').innerText = totalPrice;
+    </script>
+    <!-- Thank you! -->
 </body>
 
 </html>
