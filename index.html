@@ -37,7 +37,7 @@
         </div>
 
 
-        <div class="booking-form">
+        <div id="booking-page" class="booking-form">
             <h3>Book Ocean Time</h3>
             <div class="input-group">
                 <label for="">Flying From</label>
@@ -62,7 +62,7 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($ <span id="firstClass-total">150</span>)</label>
-                    <input id="firstClass-amount" class="inp-style inp-width" type="number" name="" value="1" min="0">
+                    <input id="firstClass-amount" class="inp-style inp-width" type="number" name="" value="0" min="0">
                 </div>
 
                 <!-- plus - minus button -->
@@ -76,7 +76,7 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($ <span id="economyClass-total">100</span>)</label>
-                    <input id="economyClass-amount" class="inp-style inp-width" type="number" name="" value="1" min="0">
+                    <input id="economyClass-amount" class="inp-style inp-width" type="number" name="" value="0" min="0">
                 </div>
 
                 <!-- plus - minus button  -->
@@ -122,74 +122,33 @@
                 <!-- grand total end! -->
             </div>
             <!-- calculations end! -->
-            <button class="btn-style">Book Now</button>
+            <button id="book-btn" class="btn-style">Book Now</button>
         </div>
 
+        <!-- handler  -->
+        <div id="another-page" class="booking-form">
+            <!-- Welcome seasion  -->
+            <h3> Welcome to our <br> Cruise Queen-Ocean time</h3>
+            <hr>
+            <p> <span style="color: royalblue; font-weight: 700;">Welocme,</span>Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Similique totam esse obcaecati
+                asperiores nobis officiis quia, repudiandae fugiat quae vel aut amet suscipit debitis nesciunt
+                exercitationem neque. Dolor, quasi quod?
+                <br>
+                <span style="color: crimson; font-weight: 700;">Thank you</span>
+                <!-- input seasion  -->
+            </p>
+            <h3 style="color: tomato;">Get us your email or number to notify you</h3>
+            <input type="email" placeholder="Enter your email">
+            <input type="tel" name="" id="" placeholder="Your phone number">
+            <button class="btn-style">Submit</button>
+        </div>
     </main>
+
     <!-- end!!!! -->
 
     <!-- script tag -->
-    <script>
-        // ticket calculation
-        function getTicket(ticket, isIncrease) {
-            const ticketInput = document.getElementById(ticket + '-amount');
-            const ticketCount = parseInt(ticketInput.value);
-
-            let ticketNewCount = ticketCount;
-            if (isIncrease == true) {
-                ticketNewCount = ticketCount + 1;
-            }
-            if (isIncrease == false && ticketCount > 0) {
-                ticketNewCount = ticketCount - 1;
-            }
-
-            ticketInput.value = ticketNewCount;
-
-            let ticketCountTotal = ticketNewCount;
-            if (ticket == 'firstClass') {
-                ticketCountTotal = ticketNewCount * 150;
-
-            }
-            if (ticket == 'economyClass') {
-                ticketCountTotal = ticketNewCount * 100;
-            }
-
-            document.getElementById(ticket + '-total').innerText = ticketCountTotal;
-            totalCalculations()
-        }
-        // ticket calculation end!
-
-        // subtotal, tax, total calculations
-        function totalCalculations() {
-            // subtotal
-            const firstClassAmount = getInputValue('firstClass')
-            const economyClassAmount = getInputValue('economyClass')
-
-            const totalPrice = firstClassAmount * 150 + economyClassAmount * 100;
-            document.getElementById('total-amount').innerText = '$' + totalPrice;
-
-            // tax
-            const tax = totalPrice * 0.1
-            document.getElementById('tax').innerText = '$' + tax;
-
-            // grand total 
-            const grandTotal = totalPrice + tax;
-            document.getElementById('grand-total').innerText = '$' + grandTotal;
-
-        }
-        function getInputValue(ticket) {
-            const ticketInput = document.getElementById(ticket + '-amount');
-            const ticketAmount = parseInt(ticketInput.value);
-            return ticketAmount;
-        }
-
-        // const newAmount = document.getElementById('economyClass-total');
-        // const newTotalAmount = parseInt(newAmount.value)
-        // const totalAmountNumber = newTotalAmount * 100;
-
-        // const totalPrice = totalAmount * 150 + newTotalAmount * 100;
-        // document.getElementById('totalPrice').innerText = totalPrice;
-    </script>
+    <script src="script.js"></script>
     <!-- Thank you! -->
 </body>
 
