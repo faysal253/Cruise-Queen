@@ -100,7 +100,8 @@ a.active {
 }
 .plus-minus-btn {
   color: blueviolet;
-  background-color: rgba(128, 128, 128, 0.671);
+  background-color: lightblue;
+  border-radius: 5px;
   font-size: 30px;
   padding: 2px;
   margin: 10px 5px 0px 0px;
